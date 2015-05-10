@@ -1,0 +1,34 @@
+server {
+        # in case we have another web server on port 80
+        listen      8080;
+
+        # This URL provides RTMP statistics in XML
+        location /stat {
+            rtmp_stat all;
+            rtmp_stat_stylesheet stat.xsl;
+        }
+
+        location /stat.xsl {
+            # XML stylesheet to view RTMP stats.
+            # Copy stat.xsl wherever you want
+            # and put the full directory path here
+            root /var/www/;
+        }
+
+        location / {
+            # XML stylesheet to view RTMP stats.
+            # Copy stat.xsl wherever you want
+            # and put the full directory path here
+            root /var/www/site/;
+        }
+
+        location /hls {
+            # Serve HLS fragments
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            alias /tmp/app;
+            expires -1;
+        }
+}
