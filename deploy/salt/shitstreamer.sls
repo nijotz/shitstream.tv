@@ -7,18 +7,8 @@ nginx-cfg:
             rtmp {
                     server {
                             listen 1935;
-
                             chunk_size 4000;
-
-                            # video on demand for flv files
-                            application vod {
-                                play /var/www/site/flvs;
-                            }
-
-                            # video on demand for mp4 files
-                            application vod2 {
-                                play /var/www/site/mp4s;
-                            }
+                            application stream { live on; }
                     }
             }
     - append_if_not_found: True
