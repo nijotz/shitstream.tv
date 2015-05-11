@@ -14,4 +14,4 @@ for page in $(seq 0 "$num_pages"); do
     curl -s "$page_url" | grep youtube.com/watch | sed -r 's%.*(v=[-0-9a-zA-Z\_]*).*%https://www.youtube.com/watch?\1%' >> $url_file
 done
 
-youtube-dl --id -a $url_file --download-archive $downloads
+youtube-dl --id -i -a $url_file --download-archive $downloads
