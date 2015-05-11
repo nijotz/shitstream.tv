@@ -3,22 +3,23 @@
     <!-- flowplayer javascript component -->
     <script src="http://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
 </head>
- 
-<body>
+
+<body style="margin:0">
 <div id="player" style="width:100%;height:100%;margin:0 auto;text-align:center"></div>
 <script>
- 
+
 $f("player", "http://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {
     clip: {
         url: 'live',
         scaling: 'fit',
-        provider: 'hddn'
+        provider: 'hddn',
+        live: true
     },
- 
+
     plugins: {
         hddn: {
             url: "flowplayer.rtmp-3.2.12.swf",
- 
+
             // netConnectionUrl defines where the streams are found
             netConnectionUrl: 'rtmp://localhost:1935/stream'
         }
