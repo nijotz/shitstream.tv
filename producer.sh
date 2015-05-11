@@ -12,6 +12,7 @@ for page in $(seq 0 "$num_pages"); do
     echo "Getting page $page of $num_pages"
     page_url="${source_url}?page=${page}"
     curl -s "$page_url" | grep youtube.com/watch | sed -r 's%.*(v=[-0-9a-zA-Z\_]*).*%https://www.youtube.com/watch?\1%' >> $url_file
+    if [ $(wc -l $url_file | awk '{print $1}') -gt 100 ]; then break; fi
 done
 
-youtube-dl --id -i -a $url_file --download-archive $downloads
+youtube-dl --max-filesize 500M --id -i -a $url_file --download-archive $downloads
