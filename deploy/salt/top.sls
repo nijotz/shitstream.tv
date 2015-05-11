@@ -1,6 +1,4 @@
 base:
-  '*':
-    - shitstreamer
   'os:Gentoo':
     - match: grain
     - gentoo

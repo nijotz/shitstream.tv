@@ -12,11 +12,14 @@ nginx-cfg:
                     }
             }
     - append_if_not_found: True
+    - require:
+      - pkg: nginx-install-pkg
 
-nginx-site:
-  file.managed:
-    - name: /etc/nginx/sites-enabled/shitstream
-    - source: salt://config/nginx-shitstream
+nginx-rtmp-module-src:
+  git.latest:
+    - name: https://github.com/arut/nginx-rtmp-module.git
+    - rev: master
+    - target: /usr/src/nginx-rtmp-module/
 
 rtmp-stats:
   file.copy:
