@@ -39,6 +39,7 @@ nginx-build-pkg:
     - require:
       - git: nginx-rtmp-module-src
       - cmd: nginx-src
+      - file: nginx-debian-rules
 
 nginx-install-pkg:
   pkg.installed:
