@@ -36,5 +36,5 @@ for file_name in filter(lambda x: x[-3:] == 'mp4', os.listdir('shitstream-files'
     url_entries.append(entry('./shitstream-files/' + file_name))
 
 while True:
-    next_url = pick(url_entries)
-    subprocess.call(['ffmpeg', '-re', '-i', str(next_url), '-c', 'copy', '-f', 'flv', 'rtmp://localhost:1935/stream/live']).wait()
+    next_video = pick(url_entries)
+    subprocess.call(['ffmpeg', '-re', '-i', str(next_video), '-c', 'copy', '-f', 'flv', 'rtmp://localhost:1935/stream/live'])
