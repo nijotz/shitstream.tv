@@ -3,6 +3,8 @@ from random import random
 import os
 import subprocess
 
+path = './'
+
 class entry:
     def __init__(self, value, weight=1):
         self.value = value
@@ -32,8 +34,8 @@ def pick(entries):
 
 url_entries = []
 
-for file_name in filter(lambda x: x[-3:] == 'mp4', os.listdir('shitstream-files')):
-    url_entries.append(entry('./shitstream-files/' + file_name))
+for file_name in filter(lambda x: x[-3:] == 'mp4', os.listdir(path)):
+    url_entries.append(entry(path + file_name))
 
 while True:
     next_video = pick(url_entries)

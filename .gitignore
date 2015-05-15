@@ -1,5 +1,7 @@
 */.vagrant/*
 shitstream-urls
 *.swp
-shitstream-files
 shitstream-downloads
+*.mp4
+*.mkv
+*.part
