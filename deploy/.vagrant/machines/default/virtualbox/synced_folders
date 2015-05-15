@@ -1,1 +1,0 @@
-{"virtualbox":{"/srv/salt":{"guestpath":"/srv/salt","hostpath":"/Users/bclement/shitstream.tv/deploy/salt","disabled":false},"/var/www/site":{"guestpath":"/var/www/site","hostpath":"/Users/bclement/shitstream.tv/site","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/bclement/shitstream.tv/deploy","disabled":false}}}
