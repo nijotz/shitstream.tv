@@ -4,12 +4,28 @@
     <script src="http://vjs.zencdn.net/4.12/video.js"></script>
     <script>
         videojs.options.flash.swf = "http://vjs.zencdn.net/4.12/video-js.swf";
+
+        videojs.options.children['controlBar'] = {
+            children: {
+                playToggle: false,
+                timeDivider: false,
+                durationDisplay: false,
+                progressControl: false,
+            }
+        };
+        videojs.options.children['bigPlayButton'] = false;
     </script>
 </head>
 
 <body style="margin:0">
-<video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="100%" 
-    data-setup='{"techOrder": ["flash"]}'>
+<video id="my_video_1" class="video-js vjs-default-skin" 
+    width="100%" height="100%" 
+    data-setup='{
+        "preload": true, 
+        "autoplay": true, 
+        "controls": true, 
+        "techOrder": ["flash"]
+    }'>
     <source src="rtmp://localhost:1935/stream&live" type='rtmp/mp4'>
 </video>
 </body>
