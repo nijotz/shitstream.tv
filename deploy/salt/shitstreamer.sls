@@ -1,3 +1,10 @@
+database:
+  postgres_database:
+    - name: shitstream
+    - present
+    - require:
+      - pkg: packages
+
 nginx-cfg:
   file.blockreplace:
     - name: /etc/nginx/nginx.conf
@@ -20,6 +27,7 @@ nginx-rtmp-module-src:
     - name: https://github.com/arut/nginx-rtmp-module.git
     - rev: master
     - target: /usr/src/nginx-rtmp-module/
+    - unless: test -d /usr/src/nginx-rtmp-module/
 
 rtmp-stats:
   file.copy:
@@ -33,3 +41,54 @@ nginx-service:
     - watch:
       - file: nginx-cfg
       - file: nginx-site
+
+/etc/init/uwsgi.conf:
+  file.managed:
+    - source: salt://config/uwsgi.conf
+
+uwsgi:
+  service:
+    - running
+    - require:
+      - pkg: packages
+      - file: /etc/init/uwsgi.conf
+
+github.com:
+  ssh_known_hosts:
+    - present
+    - fingerprint: 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48
+
+git-shitstream:
+  git.latest:
+    - name: git@github.com:nijotz/shitstream.tv.git
+    - target: /var/www/shitstream/project
+    - rev: master
+    - unless: test -d /var/www/shitstream/
+    - require:
+      - pkg: packages
+      - ssh_known_hosts: github.com
+      - file: /etc/sudoers.d/ssh-agent
+      - file: /var/www/shitstream
+
+/etc/sudoers.d/ssh-agent:
+  file.managed:
+    - source: salt://config/sudo-ssh-agent
+    - mode: 440
+
+python-pkgs:
+  pip.installed:
+    - names:
+      - virtualenv
+      - requests >= 1.0.0
+    - require:
+      - pkg: packages
+
+/var/www/shitstream:
+  file.directory:
+    - makedirs: True
+  virtualenv.managed:
+    - system_site_packages: False
+    - requirements: /var/www/shitstream/project/requirements.txt
+    - require:
+      - git: git-shitstream
+      - pip: python-pkgs

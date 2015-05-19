@@ -1,13 +1,18 @@
 include:
   - shitstreamer
 
-ubuntu-pkgs:
+packages:
   pkg.installed:
     - pkgs:
       - dpkg-dev
       - git
+      - libpq-dev
+      - postgresql
+      - python-dev
+      - python-pip
       - tmux
       - toilet
+      - uwsgi-plugin-python
       - vim-nox
 
 nginx-src:
@@ -40,6 +45,7 @@ nginx-build-pkg:
       - git: nginx-rtmp-module-src
       - cmd: nginx-src
       - file: nginx-debian-rules
+      - cmd: nginx-build-dep
 
 nginx-install-pkg:
   pkg.installed:

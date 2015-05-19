@@ -1,7 +1,7 @@
 include:
   - shitstreamer
 
-gentoo-pkgs:
+packages:
   pkg.installed:
     - pkgs:
       - app-portage/gentoolkit

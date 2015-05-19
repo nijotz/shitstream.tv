@@ -15,18 +15,23 @@
         };
         videojs.options.children['bigPlayButton'] = false;
     </script>
+    <script src="/static/js/socket.io.min.js"></script>
+    <script>
+        queue = io.connect('/queue');
+        queue.on('change', function(msg) { alert(msg) });
+    </script>
 </head>
 
 <body style="margin:0">
-<video id="my_video_1" class="video-js vjs-default-skin" 
-    width="100%" height="100%" 
+<video id="my_video_1" class="video-js vjs-default-skin"
+    width="100%" height="100%"
     data-setup='{
-        "preload": true, 
-        "autoplay": true, 
-        "controls": true, 
+        "preload": true,
+        "autoplay": true,
+        "controls": true,
         "techOrder": ["flash"]
     }'>
-    <source src="rtmp://localhost:1935/stream&live" type='rtmp/mp4'>
+    <source src="rtmp://localhost:1935/stream&live" type='rtmp/mp4'></source>
 </video>
 </body>
 </html>

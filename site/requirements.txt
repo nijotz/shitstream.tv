@@ -1,0 +1,7 @@
+ipdb
+flask
+flask-script
+flask-socketio
+flask-sqlalchemy
+psycopg2
+uwsgi
