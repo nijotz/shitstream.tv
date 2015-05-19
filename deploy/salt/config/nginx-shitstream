@@ -5,7 +5,7 @@ server {
     client_max_body_size 75M;
 
     # This URL provides RTMP statistics in XML
-    location /stat {
+    location /stat/ {
         rtmp_stat all;
         rtmp_stat_stylesheet stat.xsl;
     }
