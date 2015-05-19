@@ -1,5 +1,7 @@
 <html>
 <head>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
     <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
     <script src="http://vjs.zencdn.net/4.12/video.js"></script>
     <script>
@@ -15,14 +17,34 @@
         };
         videojs.options.children['bigPlayButton'] = false;
     </script>
+
+    <style>
+        #source {
+            display: none;
+            position: absolute;
+            font-style: italic;
+            color: white;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            z-index: 1000;
+        }
+    </style>
     <script src="/static/js/socket.io.min.js"></script>
     <script>
-        queue = io.connect('/queue/');
-        queue.on('change', function(msg) { alert(msg['msg']) });
+        $(function(){
+            $('body').mousemove(function() {
+                $('#source').fadeIn();
+                setTimeout(function() {
+                    $('#source').fadeOut();
+                })
+            });
+            queue = io.connect('/queue/');
+            queue.on('change', function(msg) { show_source(msg['msg']) });
+        })
     </script>
 </head>
 
 <body style="margin:0">
+<div id="source">i</div>
 <video id="my_video_1" class="video-js vjs-default-skin"
     width="100%" height="100%"
     data-setup='{
