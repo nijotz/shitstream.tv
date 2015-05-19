@@ -9,7 +9,7 @@ manager = Manager(app)
 
 @manager.command
 def runserver():
-    socketio.run(app)
+    socketio.run(app, host=app.config.get('HOST'), port=app.config.get('PORT'))
 
 manager.add_command("shell", Shell())
 manager.add_command("clean", Clean())

@@ -1,9 +1,17 @@
+{% set user = 'vagrant' %}
+
 database:
   postgres_database:
     - name: shitstream
     - present
     - require:
       - pkg: packages
+
+postgres-user:
+  postgres_user.present:
+    - name: {{ user }}
+    - password: password
+    - superuser: True
 
 nginx-cfg:
   file.blockreplace:

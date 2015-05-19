@@ -20,15 +20,15 @@ def current():
 
     dburi = current_app.config['SQLALCHEMY_DATABASE_URI']
     conn = psycopg2.connect(dburi)
+    conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
     curs = conn.cursor()
     curs.execute('LISTEN queue;')
 
-    epoll = select.epoll()
-    epoll.register(conn, select.EPOLLIN)
-
     while True:
-        events = epoll.poll()
-        conn.poll()
-        while conn.notifies:
-            notify = conn.notifies.pop()
-            emit('change', {'msg': 'Change'})
+        if select.select([conn], [], []) == ([], [], []):
+            pass
+        else:
+            conn.poll()
+            while conn.notifies:
+                notify = conn.notifies.pop()
+                emit('change', {'msg': 'Change'})
