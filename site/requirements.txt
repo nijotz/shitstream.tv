@@ -3,5 +3,5 @@ flask
 flask-script
 flask-socketio
 flask-sqlalchemy
+gunicorn
 psycopg2
-uwsgi

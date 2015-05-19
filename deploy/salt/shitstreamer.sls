@@ -42,16 +42,16 @@ nginx-service:
       - file: nginx-cfg
       - file: nginx-site
 
-/etc/init/uwsgi.conf:
+/etc/init/gunicorn.conf:
   file.managed:
-    - source: salt://config/uwsgi.conf
+    - source: salt://config/gunicorn.conf
 
-uwsgi:
+gunicorn:
   service:
     - running
     - require:
       - pkg: packages
-      - file: /etc/init/uwsgi.conf
+      - file: /etc/init/gunicorn.conf
 
 github.com:
   ssh_known_hosts:

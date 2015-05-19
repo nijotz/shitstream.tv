@@ -14,8 +14,10 @@ mod = Blueprint('queue', __name__)
 def hello():
     return render_template('index.html')
 
-@socketio.on('connect', namespace='/queue')
+@socketio.on('connect', namespace='/queue/')
 def current():
+    emit('change', {'msg': 'Connected'})
+
     dburi = current_app.config['SQLALCHEMY_DATABASE_URI']
     conn = psycopg2.connect(dburi)
     curs = conn.cursor()

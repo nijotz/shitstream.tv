@@ -17,8 +17,8 @@
     </script>
     <script src="/static/js/socket.io.min.js"></script>
     <script>
-        queue = io.connect('/queue');
-        queue.on('change', function(msg) { alert(msg) });
+        queue = io.connect('/queue/');
+        queue.on('change', function(msg) { alert(msg['msg']) });
     </script>
 </head>
 

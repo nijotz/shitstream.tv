@@ -12,7 +12,6 @@ packages:
       - python-pip
       - tmux
       - toilet
-      - uwsgi-plugin-python
       - vim-nox
 
 nginx-src:
