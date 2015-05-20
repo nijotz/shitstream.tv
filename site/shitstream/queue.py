@@ -6,6 +6,7 @@ from flask.ext.socketio import emit
 import psycopg2
 
 from shitstream import db, socketio
+from shitstream.models import Queue
 
 
 mod = Blueprint('queue', __name__)

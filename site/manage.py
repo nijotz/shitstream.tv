@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from flask.ext.migrate import MigrateCommand
 from flask.ext.script import Manager, Server, Shell
 from flask.ext.script.commands import Clean, ShowUrls
 from shitstream import create_app, socketio
@@ -14,6 +15,8 @@ def runserver():
 manager.add_command("shell", Shell())
 manager.add_command("clean", Clean())
 manager.add_command("showurls", ShowUrls())
+
+manager.add_command("db", MigrateCommand)
 
 if __name__ == "__main__":
     manager.run()

@@ -1,5 +1,6 @@
 ipdb
 flask
+flask-migrate
 flask-script
 flask-socketio
 flask-sqlalchemy

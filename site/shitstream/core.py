@@ -1,9 +1,11 @@
 from flask import Flask
+from flask.ext.migrate import Migrate
 from flask.ext.socketio import SocketIO
 from flask.ext.sqlalchemy import SQLAlchemy
 
 socketio = SocketIO()
 db = SQLAlchemy()
+migrate = Migrate()
 
 def create_app(config_overrides={}):
     app = Flask(__name__)
@@ -21,6 +23,7 @@ def create_app(config_overrides={}):
     app.register_blueprint(queue_module)
 
     db.init_app(app)
+    migrate.init_app(app, db)
     socketio.init_app(app)
 
     return app
