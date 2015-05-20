@@ -2,8 +2,11 @@
 from random import random
 import os
 import subprocess
+from flask import current_app
+import psycopg2
 
 path = './'
+
 
 class entry:
     def __init__(self, value, weight=1):
@@ -37,6 +40,14 @@ url_entries = []
 for file_name in filter(lambda x: x[-3:] == 'mp4', os.listdir(path)):
     url_entries.append(entry(path + file_name))
 
+dburi = current_app.config['SQLALCHEMY_DATABASE_URI']
+conn = psycopg2.connect(dburi)
+curs = conn.cursor()
+
 while True:
     next_video = pick(url_entries)
-    subprocess.call(['ffmpeg', '-re', '-i', str(next_video), '-c', 'copy', '-f', 'flv', 'rtmp://localhost:1935/stream/live'])
+    curs.execute('NOTIFY queue;')
+    subprocess.call(['ffmpeg',
+                     '-re', '-i', str(next_video),
+                     '-c', 'copy',
+                     '-f', 'flv', 'rtmp://localhost:1935/stream/live'])
