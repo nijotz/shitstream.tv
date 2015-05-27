@@ -41,8 +41,9 @@ class Weight(Base):
         lazy='dynamic'))
     weight = db.Column(db.Integer)
 
-    def pick(self):
-        entries = self.query.all()
+    @classmethod
+    def pick(cls):
+        entries = cls.query.all()
         total_weight = sum(map(lambda entry: entry.weight, entries))
         choice_weight = total_weight*random()
         chosen = None
