@@ -13,9 +13,19 @@
   $(source_icon).click(function() { $(source_info).toggle(); });
   $(source_info).hide();
 
-  var update_source = function(data) {
-    $(source_info).html(data)
+  var show_source = function(data) {
+    var html = "";
+    for (var key in data) {
+      html += key + ": " + data[key] + '<br/>';
+    }
+    $(source_info).html(html);
     console.log(data);
+  }
+
+  var get_source = function() {
+    $.getJSON('/queue/current', function(data) {
+        show_source(data);
+    });
   }
 
   var init = function(options) {
@@ -31,7 +41,7 @@
     player.on('userinactive', function() { $(source).fadeOut() });
 
     var queue = io.connect(settings['websocket_url']);
-    queue.on('change', function(data) { update_source(data); });
+    queue.on('change', get_source);
   };
 
   videojs.plugin('source', init);
