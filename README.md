@@ -31,3 +31,8 @@ ffmpeg -re -i site/mp4s/mirror.mp4 -c copy -f flv rtmp://localhost:1935/stream/l
 ```
 
 * Watch shit stream.
+
+# TODO
+* json field for video origin
+* producer.sh pull from meta iff and put in origin data
+* push video info in websocket msg
