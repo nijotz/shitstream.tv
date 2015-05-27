@@ -19,8 +19,11 @@ def create_app(config_overrides={}):
         except:
             pass
 
-    from shitstream.queue import mod as queue_module
+    from shitstream.queue import api_bp as queue_api, mod as queue_module
     app.register_blueprint(queue_module)
+    app.register_blueprint(queue_api)
+
+    from shitstream.queue import QueueCurrentResource
 
     db.init_app(app)
     migrate.init_app(app, db)

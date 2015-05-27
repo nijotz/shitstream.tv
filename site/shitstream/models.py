@@ -4,7 +4,6 @@ from shitstream import db
 
 
 class Base(db.Model):
-
     __abstract__ = True
 
     id = db.Column(db.Integer, primary_key=True)
@@ -17,13 +16,18 @@ class Base(db.Model):
 
 
 class Queue(Base):
-    id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer)
     video_id = db.Column(db.Integer, db.ForeignKey('video.id'))
     video = db.relationship('Video', backref=db.backref('queue',
         lazy='dynamic'))
 
+
+class Played(Base):
+    video_id = db.Column(db.Integer, db.ForeignKey('video.id'))
+    video = db.relationship('Video', backref=db.backref('played',
+        lazy='dynamic'))
+
+
 class Video(Base):
-    id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.Text)
     origin = db.Column(db.Text)
