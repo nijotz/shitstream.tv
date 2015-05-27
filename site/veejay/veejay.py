@@ -23,6 +23,6 @@ def run():
         curs.execute('NOTIFY queue;')
         subprocess.call(['ffmpeg',
                          '-re',
-                         '-i', str(next_video),
+                         '-i', path + '/' + next_video.filename,
                          '-c', 'copy',
                          '-f', 'flv', 'rtmp://localhost:1935/stream/live'])
