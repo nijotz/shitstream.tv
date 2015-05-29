@@ -7,3 +7,4 @@ flask-socketio
 flask-sqlalchemy
 gunicorn
 psycopg2
+youtube_dl
