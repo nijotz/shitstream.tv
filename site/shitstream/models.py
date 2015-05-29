@@ -29,5 +29,6 @@ class Played(Base):
 
 
 class Video(Base):
+    key = db.Column(db.Text)
     filename = db.Column(db.Text)
     origin = db.Column(db.Text)
