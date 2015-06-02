@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 import json
-import os
 import re
 import urllib2
 import urlparse
@@ -10,6 +9,7 @@ from flask import current_app
 
 from shitstream import db
 from shitstream.models import Video, Weight
+from shitstream.utils import temp_chdir
 
 
 def create_video_from_youtube(key, post):
@@ -71,18 +71,3 @@ def run():
                 f.write('\n')
         ytdl_cmd = 'youtube-dl --max-filesize 500M --id -i -a shitstream-urls --download-archive shitstream-downloads'
         subprocess.call(ytdl_cmd)
-
-import contextlib
-@contextlib.contextmanager
-def temp_chdir(path):
-    """
-    Usage:
-    >>> with temp_chdir(gitrepo_path):
-    ...   subprocess.call('git status')
-    """
-    starting_directory = os.getcwd()
-    try:
-        os.chdir(path)
-        yield
-    finally:
-        os.chdir(starting_directory)
