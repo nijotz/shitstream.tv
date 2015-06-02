@@ -69,5 +69,5 @@ def run():
             for url in movie_urls:
                 f.write(url)
                 f.write('\n')
-        ytdl_cmd = 'youtube-dl --max-filesize 500M --id -i -a shitstream-urls --download-archive shitstream-downloads'
+        ytdl_cmd = 'youtube-dl --max-filesize 500M --id -i -a shitstream-urls --download-archive shitstream-downloads'.split(' ')
         subprocess.call(ytdl_cmd)
