@@ -1,52 +1,28 @@
 #!/bin/python
-from random import random
-import os
-import subprocess
 from flask import current_app
+import os
 import psycopg2
+from shitstream import db
+from shitstream.models import Played, Weight
+import subprocess
 
 path = os.path.dirname(os.path.realpath(__file__))
 
 
-class entry:
-    def __init__(self, value, weight=1):
-        self.value = value
-        self.weight = weight
-
-    def __str__(self):
-        return str(self.value)
-
-
-def pick(entries):
-    total_weight = sum(map(lambda entry: entry.weight, entries))
-    choice_weight = total_weight*random()
-    chosen = None
-    i = 0
-
-    while choice_weight > 0:
-        chosen = entries[i]
-        choice_weight -= chosen.weight
-        i += 1
-
-    chosen.weight /= 10
-
-    for entry in entries:
-        entry.weight += 1
-
-    return chosen
-
-
 def run():
-    url_entries = []
-
-    for file_name in filter(lambda x: x[-3:] == 'mp4', os.listdir(path)):
-        url_entries.append(entry(path + '/' + file_name))
-
     dburi = current_app.config['SQLALCHEMY_DATABASE_URI']
     conn = psycopg2.connect(dburi)
     curs = conn.cursor()
 
     while True:
-        next_video = pick(url_entries)
+        next_video = Weight.pick()
+        played = Played()
+        played.video = next_video
+        db.session.add(played)
+        db.session.commit()
         curs.execute('NOTIFY queue;')
-        subprocess.call(['ffmpeg', '-re', '-i', str(next_video), '-c', 'copy', '-f', 'flv', 'rtmp://localhost:1935/stream/live'])
+        subprocess.call(['ffmpeg',
+                         '-re',
+                         '-i', current_app.config['MOVIE_DIR'] + '/' + next_video.filename,
+                         '-c', 'copy',
+                         '-f', 'flv', 'rtmp://localhost:1935/stream/live'])
