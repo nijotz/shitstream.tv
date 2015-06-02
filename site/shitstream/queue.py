@@ -22,7 +22,7 @@ def hello():
 
 class QueueCurrentResource(Resource):
     def get(self):
-        played = Played.query.order_by(Played.created_at)
+        played = Played.query.order_by(Played.created_at.desc())
         if not played: return None
         video = played.first().video
         video_json = json.loads(video.origin)
