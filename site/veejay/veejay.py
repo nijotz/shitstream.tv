@@ -12,6 +12,7 @@ path = os.path.dirname(os.path.realpath(__file__))
 def run():
     dburi = current_app.config['SQLALCHEMY_DATABASE_URI']
     conn = psycopg2.connect(dburi)
+    conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
     curs = conn.cursor()
 
     while True:
