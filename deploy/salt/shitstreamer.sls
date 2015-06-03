@@ -61,6 +61,28 @@ gunicorn:
       - pkg: packages
       - file: /etc/init/gunicorn.conf
 
+/etc/init/producer.conf:
+  file.managed:
+    - source: salt://config/producer.conf
+
+producer:
+  service:
+    - running
+    - require:
+      - pkg: packages
+      - file: /etc/init/producer.conf
+
+/etc/init/veejay.conf:
+  file.managed:
+    - source: salt://config/veejay.conf
+
+veejay:
+  service:
+    - running
+    - require:
+      - pkg: packages
+      - file: /etc/init/veejay.conf
+
 github.com:
   ssh_known_hosts:
     - present
