@@ -1,3 +1,6 @@
+import logging
+from logging import getLogger
+
 from flask import Flask
 from flask.ext.migrate import Migrate
 from flask.ext.socketio import SocketIO
@@ -18,6 +21,13 @@ def create_app(config_overrides={}):
             DebugToolbarExtension(app)
         except:
             pass
+
+    file_handler = logging.FileHandler('shitstream.log')
+    file_handler.setLevel(logging.DEBUG)
+    loggers = [app.logger, getLogger('sqlalchemy'), getLogger('werkzeug')]
+    for logger in loggers:
+        logger.addHandler(file_handler)
+    app.logger.info('Application logging setup')
 
     from shitstream.queue import api_bp as queue_api, mod as queue_module
     app.register_blueprint(queue_module)
