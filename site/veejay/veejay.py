@@ -22,7 +22,7 @@ def run():
         db.session.add(played)
         db.session.commit()
         curs.execute('NOTIFY queue;')
-        subprocess.call(['ffmpeg',
+        subprocess.call(['avconv',
                          '-re',
                          '-i', current_app.config['MOVIE_DIR'] + '/' + next_video.filename,
                          '-c', 'copy',
