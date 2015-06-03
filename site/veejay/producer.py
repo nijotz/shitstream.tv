@@ -52,7 +52,7 @@ def youtube_url_from_key(key):
 
 
 def run():
-    iff_posts = get_iff_posts()
+    iff_posts = get_iff_posts()[:100]
     youtube_posts = get_youtube_iff_posts(iff_posts)
     keyed_posts = { youtube_key_from_url(p['url']) : p for p in youtube_posts }
     existing_keys = [ v.key for v in Video.query.all() ]
