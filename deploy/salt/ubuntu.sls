@@ -36,34 +36,20 @@ packages:
       - libmp3lame-dev
       - libopus-dev
 
-ffmpeg-src-dir:
-  cmd.run:
-    - name: mkdir -p ffmpeg
-    - cwd: /usr/src/
 
 ffmpeg-src:
   cmd.run:
-    - name: wget http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2;tar xjvf ffmpeg-snapshot.tar.bz2
-    - cwd: /usr/src/ffmpeg/
-    - creates: /usr/src/ffmpeg/ffmpeg/
-    - require:
-      - cmd: ffmpeg-src-dir
-
-ffmpeg-build:
-  cmd.run:
-    - name: PATH="/bin/:$PATH" PKG_CONFIG_PATH="/usr/src/ffmpeg/ffmpeg_build/lib/pkgconfig" ./configure --prefix="/usr/src/ffmpeg/ffmpeg_build" --pkg-config-flags="--static" --extra-cflags="-I/usr/src/ffmpeg/ffmpeg_build/include" --extra-ldflags="-L/usr/src/ffmpeg/ffmpeg_build/lib"  --bindir="/bin/"  --enable-gpl  --enable-libass  --enable-libfreetype   --enable-libmp3lame   --enable-libopus   --enable-libtheora   --enable-libvorbis   --enable-libvpx   --enable-libx264 --enable-nonfree;PATH="/bin/:$PATH" make
-    - cwd: /usr/src/ffmpeg/ffmpeg/
-    - creates: /bin/ffmpeg
-    - require:
-      - cmd: ffmpeg-src
+    - name: wget http://ffmpeg.org/releases/ffmpeg-2.2.14.tar.bz2; tar xjvf ffmpeg-2.2.14.tar.bz2
+    - cwd: /usr/src/
+    - creates: /usr/src/ffmpeg-2.2.14/
 
 ffmpeg-install:
   cmd.run:
-    - name: make install;make distclean;hash -r;export PATH="/usr/src/ffmpeg/bin:$PATH"
-    - cwd: /usr/src/ffmpeg/ffmpeg
-    - creates: /bin/ffmpeg
+    - name: ./configure; make; make install
+    - cwd: /usr/src/ffmpeg-2.2.14
+    - creates: /usr/local/bin/ffmpeg
     - require:
-      - cmd: ffmpeg-build
+      - cmd: ffmpeg-src
 
 nginx-src:
   cmd.run:
