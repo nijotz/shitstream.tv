@@ -22,8 +22,4 @@ def run():
         db.session.add(played)
         db.session.commit()
         curs.execute('NOTIFY queue;')
-        subprocess.call(['avconv',
-                         '-re',
-                         '-i', current_app.config['MOVIE_DIR'] + '/' + next_video.filename,
-                         '-c', 'copy',
-                         '-f', 'flv', 'rtmp://localhost:1935/stream/live'])
+        subprocess.call(['ffmpeg',                         '-re',                         '-i', current_app.config['MOVIE_DIR'] + '/' + next_video.filename,                         '-c', 'copy',                         '-f', 'flv', 'rtmp://localhost:1935/stream/live'])

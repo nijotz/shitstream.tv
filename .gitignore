@@ -5,4 +5,5 @@ shitstream-urls
 *.mkv
 *.part
 *.pyc
-*/shitstream-downloads
+*.log
+shitstream-downloads

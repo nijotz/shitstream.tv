@@ -1,4 +1,4 @@
-{% set user = 'vagrant' %}
+{% set user = 'shitstream' %}
 
 database:
   postgres_database:
@@ -65,11 +65,19 @@ gunicorn:
   file.managed:
     - source: salt://config/producer.conf
 
+alembic:
+  cmd.run:
+    - name: ../bin/python manage.py db upgrade
+    - cwd: /var/www/shitstream/project
+    - require:
+      - git: git-shitstream
+
 producer:
   service:
     - running
     - require:
       - pkg: packages
+      - cmd: alembic
       - file: /etc/init/producer.conf
 
 /etc/init/veejay.conf:
@@ -81,6 +89,7 @@ veejay:
     - running
     - require:
       - pkg: packages
+      - cmd: alembic
       - file: /etc/init/veejay.conf
 
 github.com:

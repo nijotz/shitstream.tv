@@ -45,7 +45,7 @@ ffmpeg-src:
 
 ffmpeg-install:
   cmd.run:
-    - name: ./configure; make; make install
+    - name: ./configure --prefix="$HOME/ffmpeg_build" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib"  --bindir="/usr/local/bin"  --enable-gpl  --enable-libass  --enable-libfreetype  --enable-libmp3lame  --enable-libopus  --enable-libtheora  --enable-libvorbis  --enable-libx264  --enable-nonfree; make; make install
     - cwd: /usr/src/ffmpeg-2.2.14
     - creates: /usr/local/bin/ffmpeg
     - require:
