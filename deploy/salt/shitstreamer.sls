@@ -88,11 +88,14 @@ nginx-cfg:
     - marker_end: '# RTMP config -- end'
     - content: |
             rtmp {
-                    server {
-                            listen 1935;
-                            chunk_size 4000;
-                            application stream { live on; }
-                    }
+              server {
+                listen 1935;
+                chunk_size 4000;
+                application stream {
+                  live on;
+                  play_restart on;
+                }
+              }
             }
     - append_if_not_found: True
     - require:
