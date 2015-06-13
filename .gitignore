@@ -7,3 +7,4 @@ shitstream-urls
 *.pyc
 *.log
 shitstream-downloads
+site/config.py
