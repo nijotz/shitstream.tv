@@ -27,9 +27,12 @@ class QueueCurrentResource(Resource):
         if not played: return None
         video = played.first().video
         video_json = json.loads(video.origin)
+
+        # pretty up iff origin info
         if video_json.has_key('created_at'):
-            video_json['created_at'] = datetime.fromtimestamp(
+            video_json['posted'] = datetime.fromtimestamp(
                     int(video_json['created_at'])).strftime('%Y-%m-%d %H:%M:%S')
+            del(video_json['created_at'])
         return video_json
 
 api.add_resource(QueueCurrentResource, '/queue/current')
