@@ -216,7 +216,7 @@ python-pkgs:
     - require:
       - pkg: packages
 
-/var/www/shitstream/project/config.py:
+/var/www/shitstream/project/site/config.py:
   file.managed:
     - source: salt://config/config.py
     - require:
