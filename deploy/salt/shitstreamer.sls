@@ -198,6 +198,7 @@ github.com:
 
 git-shitstream:
   git.latest:
+    - user: {{ user }}
     - name: git@github.com:nijotz/shitstream.tv.git
     - target: /var/www/shitstream/project
     - rev: master

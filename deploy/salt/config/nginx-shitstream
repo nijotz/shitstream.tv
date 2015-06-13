@@ -4,7 +4,7 @@ upstream app_server {
 
 server {
     listen      8080;
-    server_name localhost;
+    server_name localhost shitstream.tv;
     charset     utf-8;
     client_max_body_size 75M;
 
