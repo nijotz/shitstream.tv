@@ -21,6 +21,7 @@ alembic:
     - user: {{ user }}
     - name: ../../bin/python manage.py db upgrade
     - cwd: /var/www/shitstream/project/site/
+    - unless: ../../bin/python manage.py db current | grep head
     - require:
       - git: git-shitstream
       - virtualenv: /var/www/shitstream
