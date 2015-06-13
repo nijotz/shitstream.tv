@@ -186,7 +186,7 @@ github.com:
   virtualenv.managed:
     - user: {{ user }}
     - system_site_packages: False
-    - requirements: /var/www/shitstream/project/requirements.txt
+    - requirements: /var/www/shitstream/project/site/requirements.txt
     - require:
       - git: git-shitstream
       - pip: python-pkgs
