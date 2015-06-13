@@ -59,7 +59,7 @@ def run():
     new_movie_keys = set(keyed_posts.keys()).difference(set(existing_keys))
 
     for new_movie_key in new_movie_keys:
-        new_video = create_video_from_youtube(new_movie_key, keyed_posts[key])
+        new_video = create_video_from_youtube(new_movie_key, keyed_posts[new_movie_key])
         weight = create_weights_for_videos(new_video)
         db.session.add(new_video)
         db.session.add(weight)
