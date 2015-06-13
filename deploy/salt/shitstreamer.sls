@@ -201,7 +201,7 @@ git-shitstream:
     - name: git@github.com:nijotz/shitstream.tv.git
     - target: /var/www/shitstream/project
     - rev: master
-    - unless: test -d /var/www/shitstream/
+    - unless: test -d /var/www/shitstream/project
     - require:
       - pkg: packages
       - ssh_known_hosts: github.com
