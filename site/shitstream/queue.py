@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import select
 import time
@@ -26,6 +27,9 @@ class QueueCurrentResource(Resource):
         if not played: return None
         video = played.first().video
         video_json = json.loads(video.origin)
+        if video_json.has_key('created_at'):
+            video_json['created_at'] = datetime.fromtimestamp(
+                    int(video_json['created_at'])).strftime('%Y-%m-%d %H:%M:%S')
         return video_json
 
 api.add_resource(QueueCurrentResource, '/queue/current')
