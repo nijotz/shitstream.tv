@@ -19,8 +19,8 @@ database:
 alembic:
   cmd.run:
     - user: {{ user }}
-    - name: ../bin/python manage.py db upgrade
-    - cwd: /var/www/shitstream/project
+    - name: ../../bin/python manage.py db upgrade
+    - cwd: /var/www/shitstream/project/site/
     - require:
       - git: git-shitstream
       - virtualenv: /var/www/shitstream
