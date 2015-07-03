@@ -27,7 +27,7 @@ http://localhost:8080
 
 * Publish some shit.
 ```
-ffmpeg -re -i site/mp4s/mirror.mp4 -c copy -f flv rtmp://localhost:1935/stream/live
+avconv -re -i site/mp4s/mirror.mp4 -c copy -f flv rtmp://localhost:1935/stream/live
 ```
 
 * Watch shit stream.

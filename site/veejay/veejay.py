@@ -32,7 +32,7 @@ def run():
 
         video_file = os.path.join(current_app.config['MOVIE_DIR'], next_video.filename)
         current_app.logger.info('Playing {}'.format(video_file))
-        subprocess.call(['ffmpeg',
+        subprocess.call(['avconv',
             '-re',
             '-v', 'warning',
             '-i', video_file,

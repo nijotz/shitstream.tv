@@ -227,11 +227,13 @@ python-pkgs:
     - require:
       - git: git-shitstream
 
+# Ubuntu
 packages:
   pkg.installed:
     - pkgs:
       - dpkg-dev
       - git
+      - libav-tools
       - libpq-dev
       - postgresql
       - python-dev
@@ -239,40 +241,4 @@ packages:
       - tmux
       - toilet
       - vim-nox
-      - autoconf
-      - automake
-      - build-essential
-      - libass-dev
-      - libfreetype6-dev
-      - libgpac-dev
-      - libsdl1.2-dev
-      - libtheora-dev
-      - libtool
-      - libva-dev
-      - libvdpau-dev
-      - libvorbis-dev
-      - libxcb1-dev
-      - libxcb-shm0-dev
-      - libxcb-xfixes0-dev
-      - pkg-config
-      - texi2html
-      - zlib1g-dev
-      - yasm
-      - libx264-dev
-      - libmp3lame-dev
-      - libopus-dev
 
-
-ffmpeg-src:
-  cmd.run:
-    - name: wget http://ffmpeg.org/releases/ffmpeg-2.2.14.tar.bz2; tar xjvf ffmpeg-2.2.14.tar.bz2
-    - cwd: /usr/src/
-    - creates: /usr/src/ffmpeg-2.2.14/
-
-ffmpeg-install:
-  cmd.run:
-    - name: ./configure --prefix="$HOME/ffmpeg_build" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib"  --bindir="/usr/local/bin"  --enable-gpl  --enable-libass  --enable-libfreetype  --enable-libmp3lame  --enable-libopus  --enable-libtheora  --enable-libvorbis  --enable-libx264  --enable-nonfree; make; make install
-    - cwd: /usr/src/ffmpeg-2.2.14
-    - creates: /usr/local/bin/ffmpeg
-    - require:
-      - cmd: ffmpeg-src
