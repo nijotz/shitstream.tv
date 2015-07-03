@@ -79,7 +79,7 @@ def get_new_videos():
             try:
                 filename = download_youtube_vid(movie_url)
             except Exception as e:
-                current_app.logger.exception('Failed to download video', e)
+                current_app.logger.exception('Failed to download video')
                 continue
 
         current_app.logger.info('Adding {} to the database'.format(new_movie_key))
