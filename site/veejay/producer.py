@@ -5,6 +5,7 @@ import re
 import urllib2
 import urlparse
 import subprocess
+import time
 
 from flask import current_app
 
@@ -82,4 +83,4 @@ def run():
         get_new_videos()
 
         current_app.logger.info('Sleeping for 10 minutes')
-        time.sleep('600')
+        time.sleep(600)
