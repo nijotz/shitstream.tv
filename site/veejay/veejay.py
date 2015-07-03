@@ -36,6 +36,6 @@ def run():
             '-re',
             '-v', 'warning',
             '-i', video_file,
-            '-c', 'copy',
+            '-vf', 'scale=-1:480,format=yuv420p',
             '-f', 'flv',
             'rtmp://localhost:1935/stream/live'])
