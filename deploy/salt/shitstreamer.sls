@@ -257,3 +257,35 @@ stupid-shit:
     - mode: 775
     - source: salt://config/motd.sh
     - template: jinja
+
+bash_history-1:
+  file.managed:
+    - name: /home/vagrant/.bash_history
+    - user: vagrant
+    - group: vagrant
+
+bash_history-2:
+  file.blockreplace:
+    - name: /home/vagrant/.bash_history
+    - prepend_if_not_found: True
+    # blockreplace doesn't support source..
+    - content: |
+        cd /var/www/shitstream && source bin/activate && cd project
+        dropdb shitstream; createdb shitstream; ./manage.py migrate upgrade head
+        find -iname '*.pyc' -delete
+        less shitstream.log
+        ./manage.py migrate revision --autogenerate -m 'Remove timezones'
+        ./manage.py migrate upgrade head
+        ./manage.py showurls
+        pip freeze
+        psql shitgstream
+        python manage.py runserver -t 0.0.0.0
+        python manage.py runserver -t 0.0.0.0 -p 7000
+        sudo htop
+        sudo netstat -lpn | grep 5000
+        sudo rm -rf /etc/postgresql/
+        sudo rm -rf /etc/postgresql-common/
+        sudo salt-call --local state.highstate
+        sudo tail -f /var/log/salt/minion
+        tail -f shitstream.log
+        tmux a -d
