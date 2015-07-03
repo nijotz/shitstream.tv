@@ -242,3 +242,18 @@ packages:
       - toilet
       - vim-nox
 
+stupid-shit:
+  pkg.purged:
+    - pkgs:
+      - landscape-common
+  file.absent:
+    - names:
+      - /etc/update-motd.d/51-cloudguest
+      - /etc/update-motd.d/10-help-text
+
+/etc/update-motd.d/zz-shitstream:
+  file.managed:
+    - user: root
+    - mode: 775
+    - source: salt://config/motd.sh
+    - template: jinja

@@ -14,6 +14,8 @@ The shitstream.tv site should now be available at http://localhost:8080
 To re-run salt:
   sudo salt-call --local state.highstate
 
+Your history is primed with some basic commands. Ctrl-R to search through them.
+
 More info to come.  *YOU* can add info to this:
 deploy/salt/config/motd.txt
 
