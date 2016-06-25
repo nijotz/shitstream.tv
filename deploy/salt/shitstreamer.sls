@@ -60,7 +60,7 @@ nginx-build-pkg:
     - name: dpkg-buildpackage -b
     - cwd: /usr/src/nginx-1.4.6/
     - output_loglevel: info
-    - creates: /usr/src/nginx-full_1.4.6-1ubuntu3.2_amd64.deb
+    - creates: /usr/src/nginx-full_1.4.6-1ubuntu3.5_amd64.deb
     - require:
       - git: nginx-rtmp-module-src
       - cmd: nginx-src
@@ -70,8 +70,8 @@ nginx-build-pkg:
 nginx-install-pkg:
   pkg.installed:
     - sources:
-      - nginx-common: /usr/src/nginx-common_1.4.6-1ubuntu3.2_all.deb
-      - nginx-full: /usr/src/nginx-full_1.4.6-1ubuntu3.2_amd64.deb
+      - nginx-common: /usr/src/nginx-common_1.4.6-1ubuntu3.5_all.deb
+      - nginx-full: /usr/src/nginx-full_1.4.6-1ubuntu3.5_amd64.deb
     - require:
       - cmd: nginx-build-pkg
 
