@@ -1,9 +1,10 @@
 {% set user = 'shitstream' %}
+{% set home = '/home/shitstream' %}
 
 shitstream:
   user.present:
     - shell: /bin/bash
-    - home: /home/shitstream
+    - home: {{ home }}
 
 # Database
 database:
@@ -260,13 +261,13 @@ stupid-shit:
 
 bash_history-1:
   file.managed:
-    - name: /home/vagrant/.bash_history
-    - user: vagrant
-    - group: vagrant
+    - name: {{ home }}/.bash_history
+    - user: {{ user }}
+    - group: {{ user }}
 
 bash_history-2:
   file.blockreplace:
-    - name: /home/vagrant/.bash_history
+    - name: {{ home }}/.bash_history
     - prepend_if_not_found: True
     # blockreplace doesn't support source..
     - content: |
