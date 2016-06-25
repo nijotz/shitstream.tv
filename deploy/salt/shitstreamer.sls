@@ -91,10 +91,13 @@ nginx-cfg:
             rtmp {
               server {
                 listen 1935;
-                chunk_size 4000;
-                application stream {
+                chunk_size 512;
+                allow play all;
+                application hls {
+                  allow play all;
                   live on;
-                  play_restart on;
+                  hls on;
+                  hls_path /tmp/hls;
                 }
               }
             }

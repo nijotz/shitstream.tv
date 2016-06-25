@@ -37,6 +37,16 @@ server {
         proxy_set_header Connection "upgrade";
     }
 
+    location /hls {
+        # Serve HLS fragments
+        types {
+            application/vnd.apple.mpegurl m3u8;
+            video/mp2t ts;
+        }
+        root /tmp;
+        add_header Cache-Control no-cache;
+    }
+
     location / {
         proxy_redirect off;
         proxy_pass   http://app_server;

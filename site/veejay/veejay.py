@@ -32,10 +32,7 @@ def run():
 
         video_file = os.path.join(current_app.config['MOVIE_DIR'], next_video.filename)
         current_app.logger.info('Playing {}'.format(video_file))
-        subprocess.call(['avconv',
-            '-re',
-            '-v', 'warning',
-            '-i', video_file,
-            '-vf', 'scale=-1:480,format=yuv420p',
-            '-f', 'flv',
-            'rtmp://localhost:1935/stream/live'])
+        command = 'avconv -re -i {} -vcodec libx264 -vprofile baseline -acodec libmp3lame -ar 44100 -ac 1 -f flv rtmp://localhost:1935/hls/index'.format(video_file)
+        current_app.logger.info('Running command: {}'.format(command))
+        command = command.split(' ')
+        subprocess.call(command)
