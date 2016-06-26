@@ -60,7 +60,7 @@ def download_youtube_vid(url):
     if match:
         return match.group(1)
     else:
-        return youtube_key_from_url(url) + '.fix'
+        return youtube_key_from_url(url) + '.mp4'
 
 def get_new_videos():
     current_app.logger.info('Retrieving new youtube posts')
