@@ -19,7 +19,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
 
   config.vm.synced_folder "salt", "/srv/salt/"
-  config.vm.synced_folder "../", "/var/www/shitstream/project/", owner: 'shitstream'
+  config.vm.synced_folder "pillar", "/srv/pillar/"
+  config.vm.synced_folder "../", "/var/www/shitstream/project/"
 
   config.vm.provision :salt do |salt|
     salt.colorize = true

@@ -1,8 +1,9 @@
-{% set user = 'shitstream' %}
-{% set home = '/home/shitstream' %}
+{% set user = salt['pillar.get']('user') %}
+{% set home = salt['pillar.get']('home') %}
 
-shitstream:
+system-user:
   user.present:
+    - name: {{ user }}
     - shell: /bin/bash
     - home: {{ home }}
 
@@ -26,6 +27,7 @@ alembic:
     - require:
       - git: git-shitstream
       - virtualenv: /var/www/shitstream
+      - file: /var/www/shitstream/project/site/config.py
 
 # nginx
 nginx-src:
@@ -241,6 +243,7 @@ python-pkgs:
 /var/www/shitstream/project/site/config.py:
   file.managed:
     - source: salt://config/config.py
+    - template: jinja
     - require:
       - git: git-shitstream
 
