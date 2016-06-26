@@ -262,6 +262,12 @@ packages:
       - toilet
       - vim-nox
 
+garbage:
+  pkg.purged:
+    - pkgs:
+      - chef
+      - puppet
+
 stupid-shit:
   pkg.purged:
     - pkgs:
