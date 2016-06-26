@@ -55,6 +55,19 @@ nginx-build-dep:
     - name: apt-get -y build-dep nginx && touch /root/builddeps
     - creates: /root/builddeps
 
+{% if grains['oscodename'] == 'trusty' and grains['osarch'] == 'amd64' %}
+nginx-prebuilt-pkg-1:
+  file.managed:
+    - name: /usr/src/nginx-full_1.4.6-1ubuntu3.5_amd64.deb
+    - source: salt://config/nginx-full_1.4.6-1ubuntu3.5_amd64.deb
+    - order: 1
+nginx-prebuilt-pkg-2:
+  file.managed:
+    - name: /usr/src/nginx-common_1.4.6-1ubuntu3.5_all.deb
+    - source: salt://config/nginx-common_1.4.6-1ubuntu3.5_all.deb
+    - order: 1
+{% endif %}
+
 nginx-build-pkg:
   cmd.run:
     - name: dpkg-buildpackage -b
