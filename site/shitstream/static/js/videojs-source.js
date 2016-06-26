@@ -1,9 +1,13 @@
-(function(window, videojs, io) {
+function sourcePlugin(opts) {
   'use strict';
+
+  var player = this;
 
   var defaults = {
     'websocket_url': '/queue/',
   };
+
+  var options = videojs.mergeOptions(defaults, opts);
 
   var source = $('<div id="source"></div>')[0];
   var source_icon = $('<div id="source_icon">i</div>')[0];
@@ -28,21 +32,14 @@
     });
   }
 
-  var init = function(options) {
-    var settings = videojs.util.mergeOptions(defaults, options);
-    var player = this;
+  player.el().appendChild(source);
 
-    player.el().appendChild(source);
+  if (player.userActive() == true) { $(source).show(); }
+  else { $(source).hide(); }
 
-    if (player.userActive() == true) { $(source).show(); }
-    else { $(source).hide(); }
+  player.on('useractive', function() { $(source).fadeIn() });
+  player.on('userinactive', function() { $(source).fadeOut() });
 
-    player.on('useractive', function() { $(source).fadeIn() });
-    player.on('userinactive', function() { $(source).fadeOut() });
-
-    var queue = io.connect(settings['websocket_url']);
-    queue.on('change', get_source);
-  };
-
-  videojs.plugin('source', init);
-})(window, window.videojs, window.io);
+  var queue = options.io.connect(options['websocket_url']);
+  queue.on('change', get_source);
+}

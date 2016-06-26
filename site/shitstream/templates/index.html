@@ -16,12 +16,18 @@
           width: 100% !important;
           height: 100% !important;
       }
+
+      .video-js.vjs-playing .vjs-tech {
+        pointer-events: none;
+      }
     </style>
 
     <script>
         $(function(){
             videojs.options.flash.swf = "http://vjs.zencdn.net/4.7.0/video-js.swf";
-            //videojs('my_video_1').source();
+            videojs.plugin('sourcePlugin', sourcePlugin);
+            video = videojs('my_video_1');
+            video.sourcePlugin({io: io});
         })
     </script>
 </head>
