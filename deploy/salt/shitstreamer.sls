@@ -10,7 +10,7 @@ system-user:
 # Database
 database:
   postgres_database.present:
-    - name: {{ user }}
+    - name: shitstream
     - require:
       - pkg: packages
   postgres_user.present:
