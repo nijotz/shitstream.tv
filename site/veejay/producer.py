@@ -65,7 +65,7 @@ def download_youtube_vid(url):
 def get_new_videos():
     current_app.logger.info('Retrieving new youtube posts')
     iff_posts = get_iff_posts()[:100]
-    youtube_posts = get_youtube_iff_posts(iff_posts)
+    youtube_posts = get_youtube_iff_posts(iff_posts)[:current_app.config['MAX_VIDEOS']]
     keyed_posts = { youtube_key_from_url(p['url']) : p for p in youtube_posts }
     existing_keys = [ v.key for v in Video.query.all() ]
     new_movie_keys = set(keyed_posts.keys()).difference(set(existing_keys))
