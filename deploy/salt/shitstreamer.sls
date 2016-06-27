@@ -284,6 +284,13 @@ stupid-shit:
     - source: salt://config/motd.sh
     - template: jinja
 
+update-motd:
+  cmd.run:
+    - name: run-parts /etc/update-motd.d/
+    - unless: true
+    - watch:
+      - file: /etc/update-motd.d/zz-shitstream
+
 bash_history-1:
   file.managed:
     - name: {{ home }}/.bash_history
