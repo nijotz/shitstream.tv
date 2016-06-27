@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "einyx/trusty64-salt2015.5.2"
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 512
+    v.memory = 1024
     v.cpus = 1
   end
 
