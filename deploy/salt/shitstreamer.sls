@@ -286,8 +286,8 @@ stupid-shit:
 
 update-motd:
   cmd.run:
-    - name: run-parts /etc/update-motd.d/
-    - unless: true
+    - name: run-parts /etc/update-motd.d/ > /var/run/motd.dynamic
+    - unless: grep shitstream /var/run/motd.dynamic
     - watch:
       - file: /etc/update-motd.d/zz-shitstream
 
