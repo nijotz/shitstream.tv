@@ -35,3 +35,9 @@ If you want to run the server manually rather than through gunicorn:
 sudo service gunicorn stop
 cd /var/www/shitstream/project/site/; /var/www/shitstream/bin/python manage.py runserver
 ```
+
+Logs:
+* /var/log/gunicorn.log
+* /var/log/upstart/veejay.log
+* /var/log/upstart/producer.log
+* /var/log/nginx/error.log
