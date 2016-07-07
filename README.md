@@ -1,38 +1,37 @@
 shitstream.tv
 =============
 
+Quickstart
+----------
 * Install vagrant.
 ```
 https://www.vagrantup.com/downloads.html
+```
+
+* Install virtualbox.
+```
+https://www.virtualbox.org/wiki/Downloads
 ```
 
 * Setup the vagrant VM.
 ```
 cd deploy; vagrant up
 ```
-
-* Deploy over and over until it actually works.
+or
 ```
-vagrant ssh
-sudo salt-call --local state.highstate
-sudo salt-call --local state.highstate
-sudo salt-call --local state.highstate
-sudo salt-call --local state.highstate
+cd deploy; VAGRANT_LOG=info vagrant up
 ```
+for debugging
 
-* Load the streamer. You'll just see a loading spinner.
+* Watch shit stream.
 ```
 http://localhost:8080
 ```
 
-* Publish some shit.
+Development
+-----------
+If you want to run the server manually rather than through gunicorn:
 ```
-avconv -re -i site/mp4s/mirror.mp4 -c copy -f flv rtmp://localhost:1935/stream/live
+sudo service gunicorn stop
+cd /var/www/shitstream/project/site/; /var/www/shitstream/bin/python manage.py runserver
 ```
-
-* Watch shit stream.
-
-# TODO
-* json field for video origin
-* producer.sh pull from meta iff and put in origin data
-* push video info in websocket msg
