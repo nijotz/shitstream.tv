@@ -94,6 +94,7 @@ nginx-site:
   file.managed:
     - name: /etc/nginx/sites-enabled/shitstream
     - source: salt://config/nginx-shitstream
+    - template: jinja
     - require:
       - pkg: nginx-install-pkg
 
