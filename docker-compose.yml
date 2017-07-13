@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+    web:
+        build: .
+        ports:
+        - "80:80"
+        volumes:
+        - .:/www
+        - ./logs:/var/log
+        - ./site/mp4s:/videos
+        links:
+        - postgres
+    postgres:
+        image: postgres:latest
+        environment:
+            - POSTGRES_USER=shitstream
+            - POSTGRES_DB=shitstream

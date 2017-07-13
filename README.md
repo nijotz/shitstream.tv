@@ -3,24 +3,28 @@ shitstream.tv
 
 Quickstart
 ----------
-* Install vagrant.
+* Install docker.
 ```
-https://www.vagrantup.com/downloads.html
-```
-
-* Install virtualbox.
-```
-https://www.virtualbox.org/wiki/Downloads
+https://docs.docker.com/engine/installation/
 ```
 
-* Setup the vagrant VM.
+* Install docker-machine (if needed).
 ```
-cd deploy; vagrant up
+https://docs.docker.com/machine/install-machine/
 ```
-or
+
+* Install docker-compose
 ```
-cd deploy; VAGRANT_LOG=info vagrant up
+https://docs.docker.com/compose/install/
 ```
+
+* Build and run shitstream
+```
+docker-compose build;docker-compose up
+```
+
+MORE TO COME
+
 for debugging
 
 * Watch shit stream.

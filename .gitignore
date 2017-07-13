@@ -6,5 +6,7 @@ shitstream-urls
 *.part
 *.pyc
 *.log
+node_modules
+init.sql
 shitstream-downloads
 site/config.py
